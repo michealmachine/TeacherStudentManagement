@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>StudentCourseMain</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+</head>
+<body>
+<div class="container-fluid" style="background-color: gainsboro">
+  <div th:replace="~{Index.html::index}"></div>
+  <div class="row">
+    <div th:replace="~{Index.html::left}"></div>
+    <div class="col-md-9" style="height: 650px">
+      <div class="row">
+        <div class="col-md-12">
+          <table class="table table-striped">
+            <thead>
+            <tr>
+              <th>studentId</th>
+              <th>studentName</th>
+              <th>courseId</th>
+              <th>courseName</th>
+              <th>teacherId</th>
+              <th>operate</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="course :${courses}">
+              <td th:text="${course.sid}"></td>
+              <td th:text="${course.studentName}"></td>
+              <td th:text="${course.cid}"></td>
+              <td th:text="${course.courseName}"></td>
+              <td th:text="${course.tid}"></td>
+              <td><a th:href="@{/studentCourseDelete/}+${course.sid}+'/'+${course.cid}+'/'+${course.tid}" class="btn btn-info bg-dark" onclick="return confirm('delete confirm?')">delete</a></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-1 offset-10 ">
+          <a href="/StudentCourseAdd" class="btn btn-info bg-dark">add</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

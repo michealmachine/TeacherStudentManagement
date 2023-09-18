@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>CourseAdd</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+</head>
+<script th:inline="javascript">
+    window.onload = function () {
+        if ([[${msg}]]) {
+            alert([[${msg}]]);
+        }
+    }
+</script>
+<body>
+<div class="container-fluid" style="background-color: gainsboro">
+    <div th:replace="~{Index.html::index}"></div>
+    <div class="row">
+        <div th:replace="~{Index.html::left}"></div>
+        <div class="col-md-9" style="height: 650px">
+            <form th:object="${courses}" action="/CourseAddCheck">
+                <div class="form-group">
+                    <label for="cid" class="col-sm-2 control-label">cid</label>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" th:name="cid" th:value="*{cid}" id="cid"
+                               onkeyup="this.value=this.value.replace(/\D/g,'')">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="name" class="col-sm-2 control-label">courseName</label>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" th:name="name" th:value="*{name}" id="name">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">teacherName</label>
+                    <div class="col-md-6">
+                        <select th:name="tid" class="form-control">
+                            <option value="">请选择</option>
+                            <option th:each="teacher:${teachers}" th:value="${teacher.id}"
+                                    th:text="${teacher.name}"></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="tname" class="col-sm-2 control-label">discription</label>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" th:name="tname" th:value="*{tname}" id="tname">
+                    </div>
+                </div>
+
+                <div class="col-md-1 offset-5">
+                    <button class="btn btn-info bg-dark" onclick="return confirm('modify confirm?')">Add</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

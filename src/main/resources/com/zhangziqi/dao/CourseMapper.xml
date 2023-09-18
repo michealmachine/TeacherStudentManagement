@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhangziqi.dao.CourseMapper">
+  <resultMap id="BaseResultMap" type="com.zhangziqi.entity.Course">
+    <id column="cid" jdbcType="INTEGER" property="cid" />
+    <id column="tid" jdbcType="INTEGER" property="tid" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="tname" jdbcType="VARCHAR" property="tname" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    cid, tid, name, tname
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="com.zhangziqi.entity.CourseKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from course
+    where cid = #{cid,jdbcType=INTEGER}
+      and tid = #{tid,jdbcType=INTEGER}
+  </select>
+  <select id="selectTeacherAndCourse" resultType="com.zhangziqi.entity.CourseTeacher">
+    select cid,tid,course.name as name,tname,teacher.name as teacherName from course left join teacher on id=course.tid order by cid;
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.zhangziqi.entity.CourseKey">
+    delete from course
+    where cid = #{cid,jdbcType=INTEGER}
+      and tid = #{tid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zhangziqi.entity.Course">
+    insert into course (cid, tid, name, 
+      tname)
+    values (#{cid,jdbcType=INTEGER}, #{tid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
+      #{tname,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhangziqi.entity.Course">
+    insert into course
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="cid != null">
+        cid,
+      </if>
+      <if test="tid != null">
+        tid,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="tname != null">
+        tname,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="cid != null">
+        #{cid,jdbcType=INTEGER},
+      </if>
+      <if test="tid != null">
+        #{tid,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="tname != null">
+        #{tname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhangziqi.entity.Course">
+    update course
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="tname != null">
+        tname = #{tname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where cid = #{cid,jdbcType=INTEGER}
+      and tid = #{tid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhangziqi.entity.Course">
+    update course
+    set name = #{name,jdbcType=VARCHAR},
+      tname = #{tname,jdbcType=VARCHAR}
+    where cid = #{cid,jdbcType=INTEGER}
+      and tid = #{tid,jdbcType=INTEGER}
+  </update>
+</mapper>

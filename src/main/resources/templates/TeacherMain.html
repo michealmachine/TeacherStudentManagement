@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>TeacherMain</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+</head>
+<body>
+<div class="container-fluid" style="background-color: gainsboro">
+    <div th:replace="~{Index.html::index}"></div>
+    <div class="row">
+        <div th:replace="~{Index.html::left}"></div>
+        <div class="col-md-9" style="height: 650px">
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>teacherId</th>
+                            <th>name</th>
+                            <th>gender</th>
+                            <th>college</th>
+                            <th colspan="2">operate</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="teacher :${teachers}">
+                            <td th:text="${teacher.id}"></td>
+                            <td th:text="${teacher.name}"></td>
+                            <td th:text="${teacher.gender}"></td>
+                            <td th:text="${teacher.college}"></td>
+                            <td><a th:href="@{/teacherModify/}+${teacher.id}" class="btn btn-info bg-dark">modify</a></td>
+                            <td><a th:href="@{/teacherDelete/}+${teacher.id}" class="btn btn-info bg-dark" onclick="return confirm('确认删除？该老师授课及选课表将一同删除')">delete</a></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-1 offset-10 ">
+                    <a href="/TeacherAdd" class="btn btn-info bg-dark">add</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

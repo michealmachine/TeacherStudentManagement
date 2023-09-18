@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Select</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+</head>
+<body>
+<div class="container-fluid" style="background-color: gainsboro">
+    <div th:replace="~{Index.html::index}"></div>
+    <div class="row">
+        <div th:replace="~{Index.html::left}"></div>
+        <div class="col-md-9" style="height: 650px">
+            <div class="row">
+                <div class="col-md-12">
+                    <form action="/TeacherSelect">
+                        <div class="form-group">
+                           <div class="row">
+                               <label class="col-sm-2 control-label">StudentName</label>
+                           </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <select th:name="sid" class="form-control">
+                                        <option value="">请选择</option>
+                                        <option th:each="student:${students}" th:value="${student.id}" th:text="${student.name}"></option>
+                                    </select>
+                                </div>
+                                <div class="col-md-1">
+                                    <button class="btn btn-info bg-dark">Quarry</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <form action="/StudentSelect">
+                        <div class="form-group">
+                            <div class="row">
+                                <label class="col-sm-2 control-label">TeacherName</label>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <select th:name="tid" class="form-control">
+                                        <option value="">请选择</option>
+                                        <option th:each="teacher:${teachers}" th:value="${teacher.id}" th:text="${teacher.name}"></option>
+                                    </select>
+                                </div>
+                                <div class="col-md-1">
+                                    <button class="btn btn-info bg-dark">Quarry</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

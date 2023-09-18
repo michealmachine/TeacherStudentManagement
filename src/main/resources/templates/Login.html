@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+</head>
+<script th:inline="javascript">
+    window.onload = function () {
+        if ([[${msg}]]) {
+            alert("用户密码不匹配");
+        }
+        if ([[${msgs}]]) {
+            alert("请先登录");
+        }
+    }
+</script>
+<body>
+
+<div class="container">
+    <div class="row" style="margin-top:100px;">
+        <div class="col-md-6" style="border-right:1px solid #ddd;">
+            <div class="col-md-9 offset-3">
+                <h3>
+                    欢迎使用学生教师管理系统
+                </h3>
+                <ul>
+                    <li>该网站为内部网站，请从相关部门获取管理员账户</li>
+                    <li>网站仅对学生、老师以及相关课程进行管理</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="well col-md-10">
+                <h3>用户登录</h3>
+                <form action="/CheckLogin" th:object="${Login}" method="post">
+                    <div class="form-group">
+                        <label for="name">name:</label>
+                        <input type="text" class="form-control" placeholder="Enter name" id="name" name="username"
+                               th:value="*{username}">
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd">Password:</label>
+                        <input type="text" class="form-control" placeholder="Enter password" id="pwd" name="password"
+                               th:value="*{password}">
+                    </div>
+                    <button type="submit" id="btn" class="btn btn-success btn-block bg-dark">
+                        登录
+                    </button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

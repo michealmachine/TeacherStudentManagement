@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>CourseMain</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+</head>
+<body>
+<div class="container-fluid" style="background-color: gainsboro">
+    <div th:replace="~{Index.html::index}"></div>
+    <div class="row">
+        <div th:replace="~{Index.html::left}"></div>
+        <div class="col-md-9" style="height: 650px">
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>courseId</th>
+                            <th>courseName</th>
+                            <th>teacherId</th>
+                            <th>teacherName</th>
+                            <th>courseDiscription</th>
+                            <th colspan="2">operate</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="course :${courses}">
+                            <td th:text="${course.cid}"></td>
+                            <td th:text="${course.name}"></td>
+                            <td th:text="${course.tid}"></td>
+                            <td th:text="${course.teacherName}"></td>
+                            <td th:text="${course.tname}"></td>
+                            <td><a th:href="@{/courseModify/}+${course.cid}+'/'+${course.tid}" class="btn btn-info bg-dark">modify</a></td>
+                            <td><a th:href="@{/courseDelete/}+${course.cid}+'/'+${course.tid}" class="btn btn-info bg-dark" onclick="return confirm('确认删除课程？若学生选择该课程也一并删除选课表')">delete</a></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-1 offset-10 ">
+                    <a href="/CourseAdd" class="btn btn-info bg-dark">add</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>StudentMain</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+</head>
+<body>
+<div class="container-fluid" style="background-color: gainsboro">
+    <div th:replace="~{Index.html::index}"></div>
+    <div class="row">
+        <div th:replace="~{Index.html::left}"></div>
+        <div class="col-md-9" style="height: 650px">
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>studentId</th>
+                            <th>name</th>
+                            <th>gender</th>
+                            <th>grade</th>
+                            <th>profession</th>
+                            <th colspan="2">operate</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="student :${students}">
+                            <td th:text="${student.id}"></td>
+                            <td th:text="${student.name}"></td>
+                            <td th:text="${student.gender}"></td>
+                            <td th:text="${student.grade}"></td>
+                            <td th:text="${student.profession}"></td>
+                            <td><a th:href="@{/studentModify/}+${student.id}" class="btn btn-info bg-dark">modify</a></td>
+                            <td><a th:href="@{/studentDelete/}+${student.id}" class="btn btn-info bg-dark" onclick="return confirm('确认删除？学生选课表中将一同删除')">delete</a></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-1 offset-10 ">
+                    <a href="/StudentAdd" class="btn btn-info bg-dark">add</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+</body>
+</html>

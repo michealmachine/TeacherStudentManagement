@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>StudentAdd</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+</head>
+<script th:inline="javascript">
+    window.onload=function (){
+        if([[${msg}]]){
+            alert([[${msg}]]);
+        }
+    }
+</script>
+<body>
+<div class="container-fluid" style="background-color: gainsboro">
+    <div th:replace="~{Index.html::index}"></div>
+    <div class="row">
+        <div th:replace="~{Index.html::left}"></div>
+        <div class="col-md-9" style="height: 650px">
+            <form th:object="${Student}" action="/StudentAddCheck">
+                <div class="form-group">
+                    <label for="id" class="col-sm-2 control-label">id</label>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" th:name="id" th:value="*{id}" id="id"
+                               onkeyup="this.value=this.value.replace(/\D/g,'')">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="name" class="col-sm-2 control-label">name</label>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" th:name="name" th:value="*{name}" id="name">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="grade" class="col-sm-2 control-label">grade</label>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" th:name="grade" th:value="*{grade}" id="grade">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-6">
+                        <label>
+                            <input type="radio" class="form-control" th:name="gender" th:value="男">男
+                        </label>
+                        <label>
+                            <input type="radio" class="form-control" th:name="gender" th:value="女">女
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="profession" class="col-sm-2 control-label">profession</label>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" th:name="profession" th:value="*{profession}" id="profession">
+                    </div>
+                </div>
+                <div class="col-md-1 offset-5">
+                    <button class="btn btn-info bg-dark" onclick="return confirm('add confirm?')">Add</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+
+</body>
+</html>
